@@ -8,15 +8,14 @@
 # 3 2 4 -> yes
 # 3 2 1 -> no
 
-def chocolate_div():
-    n = int(input("Введите ширину шоколадки "))
-    m = int(input("Введите длину шоколадки "))
-    k = int(input("Сколько долек хотите "))
-    if n * m > k:
-        if k % n == 0 or k % m == 0:
-            return "YES"
-        else:
-            return "NO"
-    return "NO"
 
-print(chocolate_div())
+n = int(input("Введите ширину шоколадки "))
+m = int(input("Введите длину шоколадки "))
+k = int(input("Сколько долек хотите "))
+
+if n * m > k and (k % n == 0 or k % m == 0):
+        message = "YES"
+else:
+        message = "NO"
+
+print(message)

@@ -10,11 +10,8 @@
 # 24 -> 4  16  4
 #     60 -> 10  40  10
 
-def count_crane():
-    a = int(input("Введите количество журавликов ")) // 6
-    value = f'{a} {a * 4} {a}'
 
-    return value
+a = int(input("Введите количество журавликов ")) // 6
+value = f'{a} {a * 4} {a}'
 
-
-print(count_crane())
+print(value)

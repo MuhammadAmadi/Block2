@@ -10,29 +10,29 @@
 # 385916 -> yes
 # 123456 -> no
 
-def winning_ticket():
-    ticket_number = input("Введите номер билета ")
-    if ticket_number.isdigit() and len(ticket_number) > 5:
 
-        first_number = int(ticket_number[:3])
-        last_number = int(ticket_number[-3:])
+ticket_number = input("Введите номер билета ")
+if ticket_number.isdigit() and len(ticket_number) > 5:
 
-        first_sum = last_sum = 0
+    first_number = int(ticket_number[:3])
+    last_number = int(ticket_number[-3:])
 
-        while first_number > 0 or last_number > 0:
+    first_sum = last_sum = 0
 
-            first_sum += first_number % 2
-            last_sum += last_number % 2
+    while first_number > 0 or last_number > 0:
 
-            first_number //= 10
-            last_number //= 10
+        first_sum += first_number % 2
+        last_sum += last_number % 2
 
-        if first_sum == last_sum:
-            return "YES"
-        else:
-            return "NO"
+        first_number //= 10
+        last_number //= 10
 
-    return "Ошибка\nВведите 6 значное число"
+    if first_sum == last_sum:
+        message = "YES"
+    else:
+        message = "NO"
+else:
+    message = "Ошибка\nВведите 6 значное число"
 
 
-print(winning_ticket())
+print(message)
