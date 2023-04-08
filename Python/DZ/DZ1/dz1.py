@@ -10,7 +10,7 @@ def sum_digit():
     a = int(input("Введите 3 значное число "))
     summ = 0
     while a > 0:
-        summ = summ + a % 10
+        summ += a % 10
         a = a // 10
     return summ
 
