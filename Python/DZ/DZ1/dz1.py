@@ -11,7 +11,7 @@ def sum_digit():
     summ = 0
     while a > 0:
         summ += a % 10
-        a = a // 10
+        a  //= 10
     return summ
 
 
