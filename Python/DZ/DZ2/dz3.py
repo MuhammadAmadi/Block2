@@ -3,7 +3,7 @@
 
 N = int(input(f"Введите число: "))
 for i in range(N):
-    if(2**i <= N):
-        print(f"{2**i}", end = " ")
+    if 2**i <= N:
+        print(f"{2**i}", end=" ")
     else:
         break

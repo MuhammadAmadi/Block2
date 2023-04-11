@@ -9,10 +9,10 @@ n = int(input("Ведите количесвто монеток: "))
 gerb = 0
 reshka = 0
 for i in range(1, n+1):
-    if random.randint(0,1) == 0:
-        gerb +=1
+    if random.randint(0, 1) == 0:
+        gerb += 1
     else:
-        reshka +=1
+        reshka += 1
 
 print(f"Вверх гербом {gerb} вверх решкой {reshka}")
 if gerb < reshka:
