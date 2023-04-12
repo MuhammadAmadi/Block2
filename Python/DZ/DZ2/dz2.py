@@ -13,12 +13,12 @@ b = int(input("Введите сумму чисел "))
 c = int(input("Введите роизведение чисел "))
 
 k = -b / 2
-D = math.pow(k, 2) - c  # D = -k^2 - ac
+D = k ** 2 - c  # D = -k^2 - ac
 if D > 0:
-    x = -k + math.sqrt(D)  # x1 = (-k^2+√D)/a
-    y = -k - math.sqrt(D)  # x1 = (-k^2-√D)/a
+    x = -k + D ** 0.5  # x1 = (-k^2+√D)/a
+    y = -k - D ** 0.5  # x1 = (-k^2-√D)/a
 elif D == 0:
-    y = x = -k + math.sqrt(D)  # x1 = (-k^2+√D)/a
+    y = x = -k + D ** 0.5  # x1 = (-k^2+√D)/a
 else:
     х = "Нет"
     y = " корней"
