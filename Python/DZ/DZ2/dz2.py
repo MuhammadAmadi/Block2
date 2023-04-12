@@ -9,10 +9,18 @@
 # P/x=y
 
 S = int(input("Введите сумму чисел "))
-P = int(input("Введите роизведение чисел "))
+P = int(input("Введите произведение чисел "))
 ind = 0
+check = False
 for i in range(S):
     for j in range(P):
         if S == i + j and P == i * j:
             print(f"{i} {j}")
+            check =True
+            break
+        ind += 1
+    else:
+        if check:
+            break
+print(ind)
 
