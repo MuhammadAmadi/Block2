@@ -19,7 +19,8 @@ x = int(input("Введите искомое число "))
 idx = 0
 list_temp = []
 for i in list_test:
-    list_temp.append(x-i)
+    list_temp.append(abs(x-i))
+
 for i in range(len(list_temp)):
     if list_temp[i] == min(list_temp):
         idx = i
