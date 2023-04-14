@@ -22,9 +22,6 @@ list_temp = []
 for i in list_test:
     list_temp.append(abs(x-i))
 
-idx = 0
-for i in range(len(list_temp)):
-    if list_temp[i] == min(list_temp):
-        idx = i
+idx = list_temp.index(min(list_temp))
 
 print(f"-> {list_test[idx]}")
