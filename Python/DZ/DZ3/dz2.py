@@ -16,11 +16,11 @@ for i in range(n):
     list_test.append(i+1)
 print(list_test)
 x = int(input("Введите искомое число "))
-max_val = max(list_test)
 idx = 0
-for i in range(len(list_test)):
-    if abs(x-list_test[i]) < max_val:
-        max_val = abs(x-list_test[i])
+list_temp = []
+for i in list_test:
+    list_temp.append(x-i)
+for i in range(len(list_temp)):
+    if list_temp[i] == min(list_temp):
         idx = i
-
 print(f"-> {list_test[idx]}")
