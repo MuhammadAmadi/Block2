@@ -17,7 +17,7 @@ for i in range(n):
     list_test.append(random.randint(-n, n+n//2))
 
 print(list_test)
-x = int(input("Введите искомое число "))
+x = int(input("Введите число "))
 list_temp = []
 for i in list_test:
     list_temp.append(abs(x-i))
