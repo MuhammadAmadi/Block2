@@ -18,7 +18,7 @@ print(list_test)
 x = int(input("Введите искомое число "))
 max_val = max(list_test)
 idx = 0
-for i in len(list_test):
+for i in range(len(list_test)):
     if abs(x-list_test[i]) < max_val:
         max_val = abs(x-list_test[i])
         idx = i
