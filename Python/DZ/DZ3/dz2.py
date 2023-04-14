@@ -9,21 +9,19 @@
 #     1 2 3 4 5
 #     6
 #     -> 5
+import random
 
 n = int(input("Введите длину списка "))
 list_test = []
 for i in range(n):
-    list_test.append(i+1)
+    list_test.append(random.randint(-n, n+n//2))
 
 print(list_test)
-x = int(input("Введите искомое число "))
+x = int(input("Введите число "))
 list_temp = []
 for i in list_test:
     list_temp.append(abs(x-i))
 
-idx = 0
-for i in range(len(list_temp)):
-    if list_temp[i] == min(list_temp):
-        idx = i
+idx = list_temp.index(min(list_temp))
 
 print(f"-> {list_test[idx]}")
