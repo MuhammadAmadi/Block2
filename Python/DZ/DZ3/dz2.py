@@ -9,11 +9,12 @@
 #     1 2 3 4 5
 #     6
 #     -> 5
+import random
 
 n = int(input("Введите длину списка "))
 list_test = []
 for i in range(n):
-    list_test.append(i+1)
+    list_test.append(random.randint(-n, n))
 
 print(list_test)
 x = int(input("Введите искомое число "))
