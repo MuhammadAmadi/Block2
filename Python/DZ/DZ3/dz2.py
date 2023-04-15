@@ -22,8 +22,9 @@ x = int(input("Введите число "))
 idx = 0
 max_val = abs(x - list_test[idx])
 for i in range(1, len(list_test)):
-    if abs(x - list_test[i]) < max_val:
-        max_val = abs(x - list_test[i])
+    t = abs(x - list_test[i])
+    if t < max_val:
+        max_val = t
         idx = i
 
 print(f"-> {list_test[idx]}")
