@@ -19,12 +19,19 @@ for i in range(n):
 print(list_test)
 
 x = int(input("Введите число "))
-idx = 0
-max_val = abs(x - list_test[idx])
-for i in range(1, len(list_test)):
-    t = abs(x - list_test[i])
+val = list_test[0]
+max_val = abs(x - list_test[0])
+# for i in list_test:
+#     t = abs(x - i)
+#     if t < max_val:
+#         max_val = t
+#         val = i
+
+set_test = set(list_test)
+for i in set_test:
+    t = abs(x - i)
     if t < max_val:
         max_val = t
-        idx = i
+        val = i
 
-print(f"-> {list_test[idx]}")
+print(f"-> {val}")
