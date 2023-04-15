@@ -17,11 +17,13 @@ for i in range(n):
     list_test.append(random.randint(-n, n+n//2))
 
 print(list_test)
-x = int(input("Введите число "))
-list_temp = []
-for i in list_test:
-    list_temp.append(abs(x-i))
 
-idx = list_temp.index(min(list_temp))
+x = int(input("Введите число "))
+idx = 0
+max_val = abs(x - list_test[idx])
+for i in range(1, len(list_test)):
+    if abs(x - list_test[i]) < max_val:
+        max_val = abs(x - list_test[i])
+        idx = i
 
 print(f"-> {list_test[idx]}")
