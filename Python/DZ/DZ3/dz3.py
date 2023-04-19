@@ -21,6 +21,6 @@ dict_test = {"A": 1, "E": 1, "I": 1, "O": 1, "U": 1, "L": 1, "N": 1, "S": 1, "T"
 str_test = input("Ведите слово ").upper()
 count_score = 0
 for i in str_test:
-    count_score += dict_test.get(i)
+    count_score += dict_test.get(i, 0)
 
 print(count_score)
