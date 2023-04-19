@@ -7,22 +7,16 @@ import random
 
 n = int(input("Введите количество элементов первого множества "))
 m = int(input("Введите количество элементов второго множества "))
-x = input("Введите 1 чтобы ввести значения вручную, или любой джругой символ чтобы заполнить рандомно")
 
 one_set = set()
 two_set = set()
-if x == 1:
-    for i in range(n):
-        one_set.add(int(input("Введите элемент первого множества")))
+for i in range(n):
+    # one_set.add(random.randint(-n, n + n // 2))
+    one_set.add(int(input("Введите элемент первого множества")))
 
-    for i in range(m):
-        two_set.add(int(input("Введите элемент второго множества")))
-else:
-    for i in range(n):
-        one_set.add(random.randint(-n, n + n // 2))
-
-    for i in range(m):
-        two_set.add(random.randint(-m, m + m // 2))
+for i in range(m):
+    # two_set.add(random.randint(-m, m + m // 2))
+    two_set.add(int(input("Введите элемент второго множества")))
 
 print(one_set)
 print(two_set)
@@ -34,9 +28,6 @@ for i in one_set:
             list_temp.append(i)
             break
 
-
 list_temp.sort()
 
-set_value = set(list_temp)
-
-print(set_value)
+print(list_temp)

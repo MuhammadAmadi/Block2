@@ -18,16 +18,14 @@ for i in range(n):
     list_cust.append(int(input("Введите значение")))
 
 print(list_cust)
-
-# [1 2 3 4 5]
-temp_val = 0
-for i in range(n):
-    if i == (n-1):
-        val = list_cust[i] + list_cust[i-1] + list_cust[0]
-    else:
-        val = list_cust[i] + list_cust[i-1] + list_cust[i+1]
+step = 3
+val = temp_val = sum(list_cust[:step])
+for i in range(n-1):
+    j = (i + step) % n
+    val = val - list_cust[i] + list_cust[j]
 
     if val > temp_val:
         temp_val = val
+
 
 print(temp_val)
