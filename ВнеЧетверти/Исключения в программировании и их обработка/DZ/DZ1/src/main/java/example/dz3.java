@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class dz3 {
     public static int[] arrayDiff(int[] reduced, int[] deduced){
-        int[] difference = null;
+        int[] difference;
         if (reduced.length != deduced.length){
             throw new RuntimeException("длины массивов не равны");
         }
