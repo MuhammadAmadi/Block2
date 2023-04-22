@@ -1,5 +1,3 @@
-package test;
-
 public class test2 {
     public static int sum2d(String[][]arr){
         int val;
