@@ -2,20 +2,23 @@
 # а некоторые – гербом. Определите минимальное число монеток, которые нужно перевернуть,
 #  чтобы все монетки были повернуты вверх одной и той же стороной. Выведите минимальное количество 
 # монет, которые нужно перевернуть
-import random
+# import random
+#
+# n = int(input("Ведите количесвто монеток: "))
+#
+# gerb = 0
+# reshka = 0
+# for i in range(n):
+#     if random.randint(0, 1) == 0:
+#         gerb += 1
+#     else:
+#         reshka += 1
+#
+# print(f"Вверх гербом {gerb} вверх решкой {reshka}")
+# if gerb < reshka:
+#     print(f"Мин монет {gerb} ")
+# else:
+#     print(f"Мин монет {reshka} ")
 
-n = int(input("Ведите количесвто монеток: "))
-
-gerb = 0
-reshka = 0
-for i in range(n):
-    if random.randint(0, 1) == 0:
-        gerb += 1
-    else:
-        reshka += 1
-
-print(f"Вверх гербом {gerb} вверх решкой {reshka}")
-if gerb < reshka:
-    print(f"Мин монет {gerb} ")
-else:
-    print(f"Мин монет {reshka} ")
+for i in range(2):
+    print(i)
