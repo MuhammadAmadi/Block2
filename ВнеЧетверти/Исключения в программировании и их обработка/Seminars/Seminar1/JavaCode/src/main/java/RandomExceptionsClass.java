@@ -1,5 +1,3 @@
-package org.example;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class RandomExceptionsClass {
 
     public static int callMethod2(int a, int b) throws IOException {
         callMethod6("");
-        FileInputStream fis = new FileInputStream("2.txt");
+        FileInputStream fis = new FileInputStream("src/main/2.txt");
         fis.read();
 
         if(fis.available() > 0) throw new RuntimeException();
