@@ -12,8 +12,6 @@ print(l2)
 
 
 def method1(l1):
-    first = None
-    last = None
     my_list = []
     count = -1
     for i in range(0, len(l1)):
