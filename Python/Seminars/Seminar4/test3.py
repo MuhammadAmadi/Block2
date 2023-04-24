@@ -6,16 +6,20 @@
 # [1,4,3,2] => "1-4"
 # [1,4] => "1,4"
 
-l1 = [1, 4]
+l1 = [1,4,5,2,3,9,8,11,0]
 l1.sort()
-count = l1[0]
-for i in l1:
-    if l1[0] == count:
-        str_test = f"{l1[0]}"
-    elif i != count:
-        str_test += f"-{count-1}"
-        count = i
-        str_test += f",{count}"
+my_list = []
+count = -1
+for i in range(0, len(l1)):
     count += 1
+    if i == len(l1)-1 or l1[i+1] - l1[i] > 1:
+        last = l1[i]
+        first = l1[i - count]
+        if first == last:
+            my_list.append(f"{first}")
+        else:
+            my_list.append(f"{first}-{last}")
 
-print(str_test)
+        count = -1
+
+print(*my_list,  sep=',')
