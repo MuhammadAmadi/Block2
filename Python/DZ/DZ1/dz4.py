@@ -14,8 +14,8 @@ m = int(input("Введите длину шоколадки "))
 k = int(input("Сколько долек хотите "))
 
 if n * m > k and (k % n == 0 or k % m == 0):
-        message = "YES"
+    message = "YES"
 else:
-        message = "NO"
+    message = "NO"
 
 print(message)

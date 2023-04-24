@@ -20,7 +20,7 @@ print(list_test)
 
 x = int(input("Введите число "))
 val = list_test[0]
-max_val = abs(x - list_test[0])
+# max_val = abs(x - list_test[0])
 # for i in list_test:
 #     t = abs(x - i)
 #     if t < max_val:
@@ -33,7 +33,7 @@ set_test = set(list_test)
 #     if t < max_val:
 #         max_val = t
 #         val = i
-
-[max_val := abs(x - i) if abs(x - i) < max_val]
-print(max_val)
+for i in set_test:
+    if abs(x-i) < abs(x-val):
+        val = i
 print(f"-> {val}")

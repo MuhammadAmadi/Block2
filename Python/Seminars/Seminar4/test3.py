@@ -19,7 +19,6 @@ for i in range(0, len(l1)):
             my_list.append(f"{first}")
         else:
             my_list.append(f"{first}-{last}")
-
         count = -1
 
 print(*my_list,  sep=',')
