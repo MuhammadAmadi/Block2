@@ -10,9 +10,7 @@
 def my_sum(a, b):
     if b == 0:
         return a
-    a += 1
-    b -= 1
-    return my_sum(a, b)
+    return my_sum(a + 1, b - 1)
 
 
 print(my_sum(2, 2))
