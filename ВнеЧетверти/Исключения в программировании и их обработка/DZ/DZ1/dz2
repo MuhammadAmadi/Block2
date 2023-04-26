@@ -16,4 +16,3 @@
  4) если передать в качестве аргумента String[][] str = null или String[][] str = new String[x][] где х какоето число
         получим ошибку (NullPointerException)
 
-

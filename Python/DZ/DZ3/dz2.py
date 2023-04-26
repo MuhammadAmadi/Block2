@@ -14,7 +14,7 @@ import random
 n = int(input("Введите длину списка "))
 list_test = []
 for i in range(n):
-    list_test.append(random.randint(-n, n+n//2))
+    list_test.append(random.randint(-n, n + n // 2))
 
 print(list_test)
 
@@ -28,10 +28,12 @@ max_val = abs(x - list_test[0])
 #         val = i
 
 set_test = set(list_test)
-for i in set_test:
-    t = abs(x - i)
-    if t < max_val:
-        max_val = t
-        val = i
+# for i in set_test:
+#     t = abs(x - i)
+#     if t < max_val:
+#         max_val = t
+#         val = i
 
+[max_val := abs(x - i) if abs(x - i) < max_val]
+print(max_val)
 print(f"-> {val}")
