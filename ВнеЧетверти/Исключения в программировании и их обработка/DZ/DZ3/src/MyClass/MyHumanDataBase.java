@@ -3,21 +3,50 @@ package MyClass;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 public class MyHumanDataBase {
-    private static boolean isNumeric(String s){return isNumeric(s,false);}
-    private static boolean isNumeric(String s ,boolean b) {
+    public static boolean isAlpha(String s, String term) {
+        if (s == null) {
+            return false;
+        }
+        if (term == null){
+            return true;
+        }
+        String myTerm = term.replaceAll("[\\[\\]]","");
+        String[] myStr = myTerm.split("::");
+        char[] myChar = myStr[0].replace("-", "").toCharArray();
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            boolean myCheck = true;
+            char c = s.charAt(i);
+            for (int j = 1; j < myChar.length; j+=2)
+                if (c >= myChar[j-1] && c <= myChar[j]) {
+                    myCheck = false;
+                    break;
+            }
+            if (myCheck&& myStr.length > 1){
+                for (int j = 0; j < myStr[1].length();j++){
+                    char f = myStr[1].charAt(j);
+                    if(c==f ||c == ' '){
+                        myCheck = false;
+                        break;
+                    }
+                }
+            }
+            if(myCheck) return false;
+        }
+        return true;
+    }
+    public static boolean isNumeric(String s ,boolean b) {
         if (s.chars().allMatch(Character::isDigit) && s.length() <= 13)
             return true;
         if (b) return false;
         throw new MyInvalidInputFormat("Неверный формат номера телефона ожидается в формате 7хххххххххх получено " + s);
     }
-    private static boolean isDateValid(String date){return isDateValid(date, false);}
-    private static boolean isDateValid(String inputDate,boolean b)
-    {
-        String date = inputDate.replace(",",".").replace("-",".").replace("/",".");
-        String DATE_FORMAT = "dd.mm.yyyy";
+    public static boolean isDateValid(String inputDate,String DATE_FORMAT,boolean b) {
+        String date = inputDate.replace(",",".");
         try {
             DateFormat df = new SimpleDateFormat(DATE_FORMAT);
             df.setLenient(false);
@@ -28,76 +57,111 @@ public class MyHumanDataBase {
             throw new MyInvalidInputFormat("Неверный формат даты ожидается дата типа dd.mm.yyyy получено " + date);
         }
     }
+    public static String myDataParseLine (String name,int lengthElement,String oneMatch,String twoMatch,String threeMatch){
+        if (isAlpha(name,oneMatch)){
+            String [] myData = name.split(" ");
+            StringBuilder strData = new StringBuilder();
 
-    public static String myDataParseLine (String name){
+            if (myData.length != lengthElement) throw new MyInvalidInputFormat("Неверный ввод данных нужно ввести 6 элементов через пробел" +
+                    "Фамилия Имя Отчество Дата_рождения(dd.mm.yyyy) Номер_телефона(7хххххххххх) пол(m,f)\nвы ввели " + myData.length + "элементов");
 
-        String [] myData = name.split(" ");
-        StringBuilder strData = new StringBuilder();
-
-        if (myData.length != 6)  throw new MyInvalidInputFormat("Неверный ввод данных нужно ввести 6 элементов" +
-                "1)Фамилия\n2)Имя\n3Отчество\n4)Дата рождения\n5)Номер телефона\n6)пол\nвы ввели "+ myData.length+"элементов");
-
-        for (int i = 0; i < myData.length; i++){
-            if (myData[i].length() > 1 && (Pattern.matches("[a-zA-Zа-яА-Я]+",myData[i]))){
-                if (i < 3)
+            for (int i = 0; i < myData.length; i++){
+                if (myData[i].length() > 1 && isAlpha(myData[i], twoMatch)){
+                    if (i < 3)
+                        strData.append(myData[i]).append(" ");
+                    else
+                        throw new MyInvalidInputFormat("Неверный ввод данных ожидается данные типа dd.mm.yyy получено "+myData[i]);
+                }else if (i == 3 && isDateValid(myData[i], "dd.mm.yyyy",false))
+                    strData.append(myData[i].replace(",",".").replace("-",".").replace("/",".")).append(" ");
+                else if (i == 4 && isNumeric(myData[i], false))
                     strData.append(myData[i]).append(" ");
-                else
-                    throw new MyInvalidInputFormat("Неверный ввод данных ожидается данные типа dd.mm.yyy получено "+myData[i]);
-            }else if (i == 3 && isDateValid(myData[i]))
-                strData.append(myData[i].replace(",",".").replace("-",".").replace("/",".")).append(" ");
-            else if (i == 4 && isNumeric(myData[i]))
-                strData.append(myData[i]).append(" ");
-            else if (i == 5 && (Pattern.matches("[fmFM]+",myData[i])))
-                strData.append(myData[i]);
-            else throw new MyInvalidInputFormat("Невереный ввод данных " + myData[i]);
+                else if (i == 5 && isAlpha(myData[i], threeMatch))
+                    strData.append(myData[i]);
+                else throw new MyInvalidInputFormat("Невереный ввод данных " + myData[i]);
+            }
+            return strData.toString();
         }
-        return strData.toString();
+        throw new MyInvalidInputFormat("Недопустимый символ "+name.replaceAll(oneMatch.replace("[+]","*"), ""));
     }
+    public static String myDataParse (String name,int lengthElement,String oneMatch,String twoMatch,String threeMatch){
+        if (isAlpha(name,oneMatch)) {
+            String[] myData = name.split(" ");
+            ArrayList<String> strDataHuman = new ArrayList<>();
+            String strDataBirthday = "", strDataPhoneNumber = "", strDataGender = "";
 
-    public static String myDataParse (String name){
+            if (myData.length != lengthElement) throw new MyInvalidInputFormat("Неверный ввод данных нужно ввести 6 элементов через пробел" +
+                    "Фамилия Имя Отчество Дата_рождения(dd.mm.yyyy) Номер_телефона(7хххххххххх) пол(m,f)\nвы ввели " + myData.length + "элементов");
 
-        String [] myData = name.split(" ");
-        StringBuilder strDataHuman = new StringBuilder();
-        String strDataBirthday = "", strDataPhoneNumber = "", strDataGender = "";
-
-        if (myData.length != 6)  throw new MyInvalidInputFormat("Неверный ввод данных нужно ввести 6 элементов" +
-                "1)Фамилия\n2)Имя\n3Отчество\n4)Дата рождения\n5)Номер телефона\n6)пол\nвы ввели "+ myData.length+"элементов");
-
-        for (String myStr: myData){
-            if (myStr.length() > 1) {
-                if (Pattern.matches("[a-zA-Zа-яА-Я]+", myStr)) {
-                    if (strDataHuman.toString().split(" ").length < 3) {
-                        strDataHuman.append(myStr).append(" ");
+            for (String myStr : myData) {
+                if (myStr.length() > 1) {
+                    if (isAlpha(myStr,twoMatch)) {
+                        if (strDataHuman.size() < 3) {
+                            strDataHuman.add(myStr+" ");
+                            continue;
+                        }
+                        throw new MyInvalidInputFormat("Неверный ввод данных ожидается ввод года рождения, телефона или гендера получено " + myStr);
+                    }
+                    if (isDateValid(myStr, "dd.mm.yyyy",true)) {
+                        strDataBirthday = myStr.replace(",", ".").replace("-", ".").replace("/", ".") + " ";
                         continue;
                     }
-                    throw new MyInvalidInputFormat("Неверный ввод данных ожидается ввод года рождения, телефона или гендера получено " + myStr);
+                    if (isNumeric(myStr, true)) {
+                        strDataPhoneNumber = myStr + " ";
+                        continue;
+                    }
                 }
-                if (isDateValid(myStr, true)) {
-                    strDataBirthday = myStr.replace(",",".").replace("-",".").replace("/",".") + " ";
+                if (isAlpha(myStr,threeMatch)) {
+                    strDataGender = myStr.toLowerCase();
                     continue;
                 }
-                if (isNumeric(myStr, true)) {
-                    strDataPhoneNumber = myStr + " ";
-                    continue;
+                throw new MyInvalidInputFormat("Невереный ввод данных " + myStr);
+            }
+            if (!strDataBirthday.isEmpty() && !strDataPhoneNumber.isEmpty() && !strDataGender.isEmpty()) {
+                strDataHuman.add(strDataBirthday);
+                strDataHuman.add(strDataPhoneNumber);
+                strDataHuman.add(strDataGender);
+            }
+            else {
+                if (strDataBirthday.isEmpty()) {
+                    throw new MyInvalidInputFormat("Ошибка введите дату рождение");
                 }
+                if (strDataPhoneNumber.isEmpty()) {
+                    throw new MyInvalidInputFormat("Ошибка введите номер телефона");
+                }
+                throw new MyInvalidInputFormat("Ошибка введите пол");
             }
-            if (Pattern.matches("[fmFM]+",myStr)) {
-                strDataGender = myStr.toLowerCase();
-                continue;
-            }
-            throw new MyInvalidInputFormat("Невереный ввод данных " + myStr);
+            return strDataHuman.toString();
         }
-        if (!strDataBirthday.isEmpty() && !strDataPhoneNumber.isEmpty() && !strDataGender.isEmpty())
-            strDataHuman.append(strDataBirthday).append(strDataPhoneNumber).append(strDataGender);
-        else {
-            if (strDataBirthday.isEmpty()){
-                throw new MyInvalidInputFormat("Ошибка введите дату рождение");
-            }
-            if (strDataPhoneNumber.isEmpty()){
-                throw new MyInvalidInputFormat("Ошибка введите номер телефона");
-            }
-            throw new MyInvalidInputFormat("Ошибка введите пол");
-        }
-        return strDataHuman.toString();
+        throw new MyInvalidInputFormat("Недопустимый символ "+name.replaceAll(oneMatch, ""));
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static String myDataParse (String name){
+        return myDataParse (name,6,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
+    }
+    /* Перегрузки
+    public static String myDataParse (String name,int lengthElement){
+        return myDataParse (name,lengthElement,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
+    }
+    public static String myDataParse (String name,int lengthElement,String oneMatch){
+        return myDataParse (name,lengthElement,oneMatch,"[a-zA-Zа-яА-Я0-9::.,/-]","[::fmFM]");
+    }
+    public static String myDataParse (String name,int lengthElement,String oneMatch,String twoMatch){
+        return myDataParse (name,lengthElement,oneMatch,twoMatch,"[::fmFM]");
+    }
+*/
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static String myDataParseLine (String name){
+        return myDataParseLine (name,6,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
+    }
+    /* Перегрузки
+    public static String myDataParseLine (String name,int lengthElement){
+        return myDataParseLine (name,lengthElement,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
+    }
+    public static String myDataParseLine (String name,int lengthElement,String oneMatch){
+        return myDataParseLine (name,lengthElement,oneMatch,"[a-zA-Zа-яА-Я]","[::fmFM]");
+    }
+    public static String myDataParseLine (String name,int lengthElement,String oneMatch,String twoMatch){
+        return myDataParseLine (name,lengthElement,oneMatch,twoMatch,"[::fmFM]");
+    }*/
 }
