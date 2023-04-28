@@ -139,29 +139,9 @@ public class MyHumanDataBase {
     public static String myDataParse (String name){
         return myDataParse (name,6,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
     }
-    /* Перегрузки
-    public static String myDataParse (String name,int lengthElement){
-        return myDataParse (name,lengthElement,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
-    }
-    public static String myDataParse (String name,int lengthElement,String oneMatch){
-        return myDataParse (name,lengthElement,oneMatch,"[a-zA-Zа-яА-Я0-9::.,/-]","[::fmFM]");
-    }
-    public static String myDataParse (String name,int lengthElement,String oneMatch,String twoMatch){
-        return myDataParse (name,lengthElement,oneMatch,twoMatch,"[::fmFM]");
-    }
-*/
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static String myDataParseLine (String name){
         return myDataParseLine (name,6,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
     }
-    /* Перегрузки
-    public static String myDataParseLine (String name,int lengthElement){
-        return myDataParseLine (name,lengthElement,"[a-zA-Zа-яА-Я0-9::.,/-]","[a-zA-Zа-яА-Я]","[::fmFM]");
-    }
-    public static String myDataParseLine (String name,int lengthElement,String oneMatch){
-        return myDataParseLine (name,lengthElement,oneMatch,"[a-zA-Zа-яА-Я]","[::fmFM]");
-    }
-    public static String myDataParseLine (String name,int lengthElement,String oneMatch,String twoMatch){
-        return myDataParseLine (name,lengthElement,oneMatch,twoMatch,"[::fmFM]");
-    }*/
 }
