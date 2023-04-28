@@ -19,7 +19,7 @@ public class dz {
                 temp[i] = temp[i].substring(0,temp[i].length()-1);
             }
         }
-        return name[0];
+        return name[0]+"txt";
     }
     public static void myWriter(Object myObj) throws IOException{
         if (myObj == null){
