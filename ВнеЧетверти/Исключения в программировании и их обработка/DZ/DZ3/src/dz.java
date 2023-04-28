@@ -5,30 +5,41 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class dz {
-    public static String isFileExists(String[] name){
-        String[] temp = Arrays.copyOf(name,name.length);
-        for (int k = 0; k < 3; k++) {
-            for (int i = 0; i < 3; i++) {
-                Path j = Paths.get(temp[i] + ".txt");
-                if (Files.exists(j)) {
-                    return j.toString();
-                }
-                temp[i] = temp[i].substring(0,temp[i].length()-1);
+    public static String isFileExists(File[] listFiles,String startsWith, String endsWith){
+        String fileName;
+        for (var file : listFiles) {
+            fileName = file.getName();
+            if (fileName.startsWith(startsWith) && fileName.endsWith(endsWith)) {
+                return fileName;
             }
         }
-        return name[0]+".txt";
+        return "";
     }
-    public static void myWriter(Object myObj) throws IOException{
-        if (myObj == null){
+    public static void myWriter(String lineToWrite) throws IOException{
+        if (lineToWrite == null){
             throw new MyInvalidInputFormat("Метод myWriter получил пустой объект");
         }
 
-        String myLine = myObj.toString().replaceAll(",",";");
+        File[] files = new File(new File("").getAbsolutePath()).listFiles();
+        String myLine = lineToWrite.toString().replaceAll(",",";");
         String[] temp = Arrays.copyOfRange(myLine.split(";"),0,4);
-        String nameFile = isFileExists(temp);
+
+        String nameFile = temp[0]+".txt";
+        for (int i = 0; i < 3; i++){
+            for (int j =0; j < temp.length-1; j++){
+                String tmp = isFileExists(files,temp[i].substring(0,temp[i].length()-i),".txt");
+                if (!tmp.isEmpty()){
+                    nameFile = tmp;
+                    i = 3;
+                    break;
+                }
+            }
+        }
+
         try(BufferedWriter fw = new BufferedWriter(new FileWriter(nameFile,true));
             Scanner fr = new Scanner(new FileReader(nameFile))) {
 
@@ -57,7 +68,6 @@ public class dz {
                     "до 13 цифр, пол f-женский m-мужской");
             lastName = MyHumanDataBase.myDataParse(in.nextLine()).replaceAll("[\\[\\] ]", "");
             myWriter(lastName);
-
         }catch (MyInvalidInputFormat e){
             e.printMessage();
         }catch (IOException e){
