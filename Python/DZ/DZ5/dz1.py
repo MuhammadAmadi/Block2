@@ -12,18 +12,13 @@ def my_pow(a, b):
         return "Ошибка"
     if abs(b) >= 1:
         if b > 0:
-            if b == 1:
-                return a
             return a * my_pow(a, b - 1)
         if a == 0:
             return "бесконечность"
-        if b == -1:
-            return 1 / a
         return 1 / a * my_pow(a, b + 1)
     if b == 0:
         return 1
-    if 1 > b > -1:
-        return a ** b
+    return a ** b
 
 
-print(my_pow(-2, 3))
+print(my_pow(0, -2))
