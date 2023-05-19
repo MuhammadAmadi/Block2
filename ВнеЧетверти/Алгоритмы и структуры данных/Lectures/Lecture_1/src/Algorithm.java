@@ -17,7 +17,7 @@ public class Algorithm {
     public static List<Integer> findSimpleNumbers(int number){
         int counter = 0;
         List<Integer> result = new ArrayList<>();
-        int k = 0;
+        int k;
         for (int i = 2; i <= number; i++){
             boolean simple = true;
             k = (int)Math.sqrt(i);
