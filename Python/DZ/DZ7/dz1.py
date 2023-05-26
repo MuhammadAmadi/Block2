@@ -33,3 +33,4 @@ if foo(my_line):
     print("Парам пам-пам")
 else:
     print("Пам парам")
+
