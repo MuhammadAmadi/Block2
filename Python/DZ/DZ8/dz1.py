@@ -64,6 +64,9 @@ def edit(name):
         else:
             selected = int(selected)
             selected = range(selected-1, selected)
+    elif len(line_edit) == 0:
+        print("\nНе найдено ни одной записи\n")
+        return
     with open(name, 'r', encoding='utf-8') as book:
         number_book = book.read().split('\n')
     idx = 0
@@ -98,6 +101,9 @@ def deleted(name):
         else:
             selected = int(selected)
             selected = range(selected - 1, selected)
+    elif len(line_del) == 0:
+        print("\nНе найдено ни одной записи\n")
+        return
     with open(name, 'r', encoding='utf-8') as book:
         number_book = book.read().split('\n')
     for i in selected:
