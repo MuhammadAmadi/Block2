@@ -10,8 +10,6 @@ public class Main {
         myLinkedList.add(4);
         myLinkedList.add(9);
         myLinkedList.add(6);
-        myLinkedList.sort();
-        System.out.println(myLinkedList.ToString());
         System.out.println(myLinkedList.ToString());
         System.out.println(myLinkedList.size());
         System.out.println(myLinkedList.pop(2).toString());
