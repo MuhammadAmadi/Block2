@@ -28,20 +28,25 @@ public class Main {
         List<Notebook> notebookList = List.of(as514,as513,sm110,sm150,ac1505,ac1787);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите\n1 - для поиска по цвету\n2 - чтобы указать минимальный объем оперативки");
-        int command = scanner.nextInt();
-        scanner.nextLine();
-        if (command == 1){
-            System.out.print("Введите цвет: > ");
-            String color = scanner.nextLine().trim();
-            for (Notebook notebook : notebookList) {
-                if (notebook.get("Цвет").equalsIgnoreCase(color)) System.out.println(notebook);
-            }
-        } else if (command == 2){
-            System.out.print("Введите минимальный объем оперативной памяти: > ");
-            int ram = scanner.nextInt();
-            for (Notebook notebook : notebookList) {
-                if (Double.parseDouble(notebook.get("Объём RAM")) >= ram) System.out.println(notebook);
+        System.out.println("Введите\n1 - для поиска по цвету\n2 - чтобы указать минимальный объем оперативки\n" +
+                "3 - для выхода из программы");
+        while (true) {
+            int command = scanner.nextInt();
+            scanner.nextLine();
+            if (command == 1) {
+                System.out.print("Введите цвет: > ");
+                String color = scanner.nextLine().trim();
+                for (Notebook notebook : notebookList) {
+                    if (notebook.get("Цвет").equalsIgnoreCase(color)) System.out.println(notebook);
+                }
+            } else if (command == 2) {
+                System.out.print("Введите минимальный объем оперативной памяти: > ");
+                int ram = scanner.nextInt();
+                for (Notebook notebook : notebookList) {
+                    if (Double.parseDouble(notebook.get("Объём RAM")) >= ram) System.out.println(notebook);
+                }
+            } else if (command == 3) {
+                break;
             }
         }
         scanner.close();
